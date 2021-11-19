@@ -4,6 +4,7 @@ AA_list = ['A', 'R', 'N', 'D', 'C',
      'Q', 'E', 'G', 'H', 'I',
      'L', 'K', 'M', 'F', 'P',
      'S', 'T', 'W', 'Y', 'V']
+AAmap = np.array(AA_list)
 
 AA_dict = dict(zip(AA_list, range(20)))
 
