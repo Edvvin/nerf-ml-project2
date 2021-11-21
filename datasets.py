@@ -1,6 +1,13 @@
-from torch import Dataset
-import padnas as pd
+import torch
+from torch.utils.data import Dataset
+import pandas as pd
 import utils
+
+def cut_and_pad(x, cutlen):
+    temp = AAmap[x][:cutlen] # cut
+    padding = maxlen-len(temp)
+    return torch.cat([temp, torch.zeros(padding)]), 
+        torch.cat([torch.ones(temp.shape[0]), torch.zeros(padding)])
 
 class AASequenceDataset(Dataset):
     
@@ -18,7 +25,20 @@ class AASequenceDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
         minibatch = data.iloc[idx]
-        in_data = minibatch['seq']
-        in_data.apply(lambda x : torch.cat([AAmap[x], torch.zeros()]))
-        in_data = torch.array(in_data)
-        return in_data
+        seqs = []
+        masks = []
+        labels = []
+
+        for row in minibatch:
+            seq, mask = cut_and_pad(row['seq'], maxlen)
+            seqs.append(seq)
+            masks.append(mask)
+            label = row['Position']
+            binlabel = torch.zeros(maxlen)
+            binlabel[label] = 1.
+            labels.append(binlabel)
+
+        seqs = torch.torch(seqs)
+        masks = torch.torch(masks)
+        labels = torch.torch(labels)
+        return seqs, masks, labels
