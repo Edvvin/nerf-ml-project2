@@ -1,20 +1,25 @@
 import torch
+import numpy as np
 from torch.utils.data import Dataset
 import pandas as pd
-import utils
+from utils import *
+import re
+
 
 def cut_and_pad(x, cutlen):
-    temp = AAmap[x][:cutlen] # cut
-    padding = maxlen-len(temp)
-    return torch.cat([temp, torch.zeros(padding)]), 
-        torch.cat([torch.ones(temp.shape[0]), torch.zeros(padding)])
+    temp = torch.tensor(x[:cutlen]) # cut
+    padding = cutlen-len(temp)
+    return (
+            torch.cat([temp, torch.zeros(padding)]), 
+            torch.cat([torch.ones(temp.shape[0]), torch.zeros(padding)])
+        )
 
 class AASequenceDataset(Dataset):
     
     def __init__(self, tsv_file, maxlen=None):
         self.data = pd.read_csv(tsv_file, sep='\t')
         if(maxlen == None):
-            self.maxlen = torch.max(self.data['seq_len'])
+            self.maxlen = np.max(self.data['seq_len'])
         else:
             self.maxlen = maxlen
 
@@ -22,23 +27,15 @@ class AASequenceDataset(Dataset):
         return self.data.shape[0]
 
     def __getitem__(self, idx):
-        if torch.is_tensor(idx):
-            idx = idx.tolist()
-        minibatch = data.iloc[idx]
-        seqs = []
-        masks = []
-        labels = []
+        row = self.data.iloc[idx]
+        seq = row['seq']
+        seq = re.findall(r'\d+', seq)
+        seq = list(map(int, seq))
+        seq, mask = cut_and_pad(seq, self.maxlen)
+        label = row['Position']
+        binlabel = torch.zeros(self.maxlen)
+        label = re.findall(r'\d+', label)
+        label = list(map(int, label))
+        binlabel[label] = 1.
 
-        for row in minibatch:
-            seq, mask = cut_and_pad(row['seq'], maxlen)
-            seqs.append(seq)
-            masks.append(mask)
-            label = row['Position']
-            binlabel = torch.zeros(maxlen)
-            binlabel[label] = 1.
-            labels.append(binlabel)
-
-        seqs = torch.torch(seqs)
-        masks = torch.torch(masks)
-        labels = torch.torch(labels)
-        return seqs, masks, labels
+        return seq, mask, binlabel
