@@ -9,11 +9,11 @@ AA_CNT = 20
 
 def cut_and_pad(x, cutlen):
     """
-	Cuts and and adds padding to tensor
+    Cuts and and adds padding to tensor
 
-	This function converts sequences (i.e. tensors) of variable length into ones of uniform length. 
-	This is done by cutting sequences which are too long or by adding zero padding to shorter
-	sequences in such a way that the end sequence has exactly cutlen elements.
+    This function converts sequences (i.e. tensors) of variable length into ones of uniform length. 
+    This is done by cutting sequences which are too long or by adding zero padding to shorter
+    sequences in such a way that the end sequence has exactly cutlen elements.
 
     Parameters
     ----------
@@ -36,39 +36,39 @@ def cut_and_pad(x, cutlen):
 
 class AASequenceDataset(Dataset):
     """
-	Dataset class for the sequence only model
-	
-	This is the dataset for the model which will only take into consideration the amino acid 
-	sequence.
+    Dataset class for the sequence only model
+    
+    This is the dataset for the model which will only take into consideration the amino acid 
+    sequence.
     """
 
-    def __init__(self, tsv_file, maxlen=None, onehot_input=True, multihot_output=True,
-																equal_size=False):
-	'''
-    Parameters
-    ----------
-    tsv_file : String
-        The path to the adequate .tsv file
-    maxlen : int
-        The length all sequences will be cut off at or padded to. If `None` then it will be set to
-		the length of the longest sequences (no cutting)
-	onehot_input : boolean
-		If set to `True` all of the input sequence elements will be expaneded to a onehot encoding.
-		Otherwise, the input sequence will be encoded by ordinal values
-	mutlihot_output : boolean
-		If set to `True` the labels will be arrays of ones and zeros where ones denote the PTM sites
-		Otherwise, the labels will be encoded by ordinal values
-	
+    def __init__(self, tsv_file, maxlen=None, onehot_input=True, multihot_output=True, equal_size=False):
 
-    Returns
-    -------
-    torch.Tensor
-        The input sequence
-	torch.Tesnor
-		The mask where values of 1. denote that the input is in use while 0 means that it is masked
-	torch.Tensor
-		The label
-'''
+        """
+        Parameters
+        ----------
+        tsv_file : String
+            The path to the adequate .tsv file
+        maxlen : int
+            The length all sequences will be cut off at or padded to. If `None` then it will be set to
+            the length of the longest sequences (no cutting)
+        onehot_input : boolean
+            If set to `True` all of the input sequence elements will be expaneded to a onehot encoding.
+            Otherwise, the input sequence will be encoded by ordinal values
+        mutlihot_output : boolean
+            If set to `True` the labels will be arrays of ones and zeros where ones denote the PTM sites
+            Otherwise, the labels will be encoded by ordinal values
+
+        Returns
+        -------
+        torch.Tensor
+            The input sequence
+        torch.Tesnor
+            The mask where values of 1. denote that the input is in use while 0 means that it is masked
+        torch.Tensor
+            The label
+        """
+
         self.data = pd.read_csv(tsv_file, sep='\t')
         self.equal_size = equal_size
         self.onehot_input = onehot_input
