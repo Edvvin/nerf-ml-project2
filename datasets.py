@@ -102,9 +102,13 @@ class AASequenceDataset(Dataset):
         label = row['Position']
         label = re.findall(r'\d+', label)
         label = list(map(int, label))
+        label = list(map(lambda x : x-1,label))
 
         if(self.multihot_output):
-            binlabel = torch.zeros(self.maxlen)
+            if(self.equal_size):
+                binlabel = torch.zeros(self.maxlen)
+            else:
+                binlabel = torch.zeros(seq.shape[0])
             binlabel[label] = 1.
             label = binlabel
 
