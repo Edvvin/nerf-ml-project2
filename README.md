@@ -1,31 +1,71 @@
-# ML4Science Project
+# ML4Science Project - Phosphorelation Site Prediction Using Deep Learning <!-- omit in toc -->
+
+This team project is a part of the [Machine Learning](<https://www.epfl.ch/labs/mlo/machine-learning-cs-433> "EPFL's Machine Learning course") curriculum at the EPFL.
+
+The purpose of this file is to explain the project/code structure and to help you running the scripts. 
+
+For more information about the implementation, feel free to check out the commented code, as well as the [final report](report/Machine_Learning_Project_2.pdf), which contains the entire thought process, with all findings and conclusions.
+
+## Table of Contents <!-- omit in toc -->
+- [Abstract](#abstract)
+- [Data](#data)
+- [Repo organization](#repo-organization)
+	- [Notebooks and scripts](#notebooks-and-scripts)
+- [Authors](#authors)
+
+## Abstract
+
+Predicting amino acid residues which are phosphorylation sites is an important problem from a biological and biomedical perspective. In this paper, we propose two neural network architectures for classifying whether residues are phosphorylation sites or not. These approaches are then compared. Additionally, we show that residue sequences have a strong representational power for the given problem. Lastly, by leveraging the outputs of the PESTO model for protein-protein interaction prediction we see that the protein-protein prediction problem is not easily transferred to phosphorylation site prediction using our methods.
+
+## Data
+For the purpose of training and model evaluation, we have used two datasets - Eukaryotic Phosphorylation Sites Database and PESTO dataset.
+
+The necessary data can be retrieved from [here](https://drive.google.com/drive/folders/1eKOZOaClqz94sYwslzmfj9ndhhTpvpo3?usp=sharing). Note that PESTO embedding data is kept on a private drive belonging to the [EPFL's Laboratory for Biomolecular Modeling](https://www.epfl.ch/labs/lbm/). For more information, please contact us.
+
+All of the data used in scripts and notebooks should be stored in the `/data` subdirectory.
 
 ## Repo organization
+The source code of this project is structured in the following manner. 
 
-### Subdirectories
+```
+project
+├── README.md
+│
+├─ data/       # needs to be added manually                
+│
+├─ report/     # project report         
+│    
+├── analysis   # data analysis (notebooks)
+│   ├── data_analysis_LinearModel.ipynb
+|	├── data_analysis.ipynb
+│   └── PESTO_analysis.ipynb
+|
+└── training   # model training notebooks and scripts               
+   ├── datasets.py
+   ├── models.py
+   ├── training_and_evaluation.py
+   ├── training.ipynb
+   ├── trainingCNN.ipynb
+   ├── trainingLinear.ipynb
+   └── utils.py
 
-- data
-	- Contains the all the data needed for the project
+```
+
+### Notebooks and scripts
 - analysis
-	- Contains notebooks reffered to the analysis of the data
-- training
-	- Contains training notebooks and additional scripts
-
-### Data
-All of the data used for running scripts is stored in the ./data subdirectory which is not being maintained version controlled.
-The data can be retrieved from [here](https://drive.google.com/drive/folders/1eKOZOaClqz94sYwslzmfj9ndhhTpvpo3?usp=sharing).
-Note thas PESTO embedding data is kept on the private drive belonging to the EPFL's Laboratory for Biomolecular Modeling. For more informations, please contact us.
-
-## Notebooks and scripts
-- analysis
-	- *data_analysis.ipynb* 
-	- *data_analysis_LinearModel.ipynb* 
-	- *PESTO_analysis.ipynb* 
+	- `data_analysis.ipynb`
+	- `data_analysis_LinearModel.ipynb`
+	- `PESTO_analysis.ipynb`
 
 - training
-	- *datasets.py* - Contains implementations of the Dataset classes used in training for Linear Models (AASequenceDatasetLinear class) and CNN (AASequenceDataset).
-	- *models.py* - Contains implementations of the model class used for the training of the CNN. Note that in case of the Linear model approach, models have been defined inside the notebook *trainingLinear.ipynb*
-	- *training_and_evaluation* - Contains implementations of the trainig phase for Linear model and evaluation phase for both approaches
-	- *utils.py* - Contains implementation of the util functions 
-	- *trainingCNN* - Main notebook for the training and evaluation of the CNN model
-	- *trainingLinear* - Main notebook for the trainig and evaluation of the Linear model
+	- `datasets.py` - Contains implementations of the Dataset classes used in training for Linear Models (_AASequenceDatasetLinear_ class) and CNN (_AASequenceDataset_).
+	- `models.py` - Contains implementation of the model class used for the training of the CNN. Note that in case of the Linear model approach, models have been defined inside the notebook `trainingLinear.ipynb`.
+	- `training_and_evaluation.py` - Contains implementations of the training phase for Linear model and evaluation phase for both approaches.
+	- `utils.py` - Contains implementation of the util functions.
+	- `trainingCNN.ipynb` - Main notebook for the training and evaluation of the CNN model.
+	- `trainingLinear.ipynb` - Main notebook for the training and evaluation of the Linear model.
+
+## Authors
+* Edvin Maid
+* Filip Carevic
+* Natalija Mitic
