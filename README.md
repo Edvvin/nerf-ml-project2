@@ -25,19 +25,19 @@ The necessary data can be retrieved from [here](https://drive.google.com/drive/f
 All of the data used in scripts and notebooks should be stored in the `/data` subdirectory.
 
 ## Repo organization
-The source code of this project is structured in the following manner. 
+The source code of this project is structured in the following manner: 
 
 ```
 project
 ├── README.md
 │
-├─ data/       # needs to be added manually                
+├─ data/       # data folder - needs to be added manually                
 │
 ├─ report/     # project report         
 │    
 ├── analysis   # data analysis (notebooks)
 │   ├── data_analysis_LinearModel.ipynb
-|	├── data_analysis.ipynb
+|   ├── data_analysis.ipynb
 │   └── PESTO_analysis.ipynb
 |
 └── training   # model training notebooks and scripts               
