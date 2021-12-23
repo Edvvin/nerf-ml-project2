@@ -83,7 +83,9 @@ The source code of this project is structured in the following manner:
 project
 ├── README.md
 │
-├── data/       # data folder - needs to be added manually                
+├── data/       # data folder - needs to be added manually  
+│
+├── saved_models/       # contains trained models                
 │
 ├── report/     # project report         
 │    
@@ -106,9 +108,7 @@ project
 ### Notebooks and scripts
 
 - analysis
-  - `data_analysis.ipynb`
-  - `data_analysis_LinearModel.ipynb`
-  - `PESTO_analysis.ipynb`
+  - `data_analysis.ipynb` - Contains data analysis and preprocessing phase.
 
 - training
   - `datasets.py` - Contains implementations of the Dataset classes used in training for Linear Models (_AASequenceDatasetLinear_ class) and CNN (_AASequenceDataset_).
