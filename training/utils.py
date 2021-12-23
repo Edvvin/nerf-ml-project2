@@ -1,45 +1,50 @@
 import numpy as np
-# List of amino acids
+
+# AA_list is the numeric encoding of different AA
+# each index corresponds to one of the 20 natrual AA
 AA_list = ['A', 'R', 'N', 'D', 'C',
      'Q', 'E', 'G', 'H', 'I',
      'L', 'K', 'M', 'F', 'P',
      'S', 'T', 'W', 'Y', 'V']
 AAmap = np.array(AA_list)
 
-# Mapping of amino acid (i.e., character) to index
+# Used to apply the mapping
 AA_dict = dict(zip(AA_list, range(20)))
 
 def aa_to_ord(aa):
      '''
-     Converts character representation of amino acid to integer representation.
-     Returns -1 for invalid input.
+     Converts a given AA character representation 
+     into its ordinal value
 
      Parameters
      ----------
-     aa: character
-          Amino acid to be converted
-     
+     aa: Character
+          Character representation of an AA
+
      Returns
      -------
      int
+          Ordinal representation of a given AA
      '''
+
      try:
           return AA_dict[aa]
      except:
-          return -1
+          return -1 # if the AA is not one of the 20
 
 def aa_seq_to_ord(aa_seq):
      '''
-     Converts sequence of amino acids to integer representation (i.e, array of integers)
+     Applies the aa_to_ord function to all elements of
+     a given sequence of AA
 
      Parameters
      ----------
-     aa_seq: no.array<char>
-          Amino acid sequence to be converted
-     
+     aa: np.Array
+          Array of AA abbriviations
+
      Returns
      -------
-     np.array<int> 
-          Integer representation
+     np.Array
+          Array of ordinal representations of the given AAs
      '''
      return np.vectorize(aa_to_ord)(aa_seq)
