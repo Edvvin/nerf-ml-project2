@@ -90,9 +90,8 @@ project
 ├── report/     # project report         
 │    
 ├── analysis   # data analysis (notebooks)
-│   ├── data_analysis_LinearModel.ipynb
 │   ├── data_analysis.ipynb
-│   └── PESTO_analysis.ipynb
+│   
 │
 └── training   # model training notebooks and scripts               
    ├── datasets.py
