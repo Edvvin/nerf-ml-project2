@@ -83,9 +83,9 @@ The source code of this project is structured in the following manner:
 project
 ├── README.md
 │
-├─ data/       # data folder - needs to be added manually                
+├── data/       # data folder - needs to be added manually                
 │
-├─ report/     # project report         
+├── report/     # project report         
 │    
 ├── analysis   # data analysis (notebooks)
 │   ├── data_analysis_LinearModel.ipynb
