@@ -9,6 +9,7 @@ For more information about the implementation, feel free to check out the commen
 ## Table of Contents <!-- omit in toc -->
 - [Abstract](#abstract)
 - [Data](#data)
+- [Getting Started](#getting-started)
 - [Repo organization](#repo-organization)
 	- [Notebooks and scripts](#notebooks-and-scripts)
 - [Authors](#authors)
@@ -22,7 +23,38 @@ For the purpose of training and model evaluation, we have used two datasets - Eu
 
 The necessary data can be retrieved from [here](https://drive.google.com/drive/folders/1eKOZOaClqz94sYwslzmfj9ndhhTpvpo3?usp=sharing). Note that PESTO embedding data is kept on a private drive belonging to the [EPFL's Laboratory for Biomolecular Modeling](https://www.epfl.ch/labs/lbm/). For more information, please contact us.
 
-All of the data used in scripts and notebooks should be stored in the `/data` subdirectory.
+All of the data used in scripts and notebooks should be stored in the `data/` subdirectory.
+
+## Getting Started
+
+As a prerequisite, **python3** and **pip3** should already be installed.
+
+1. Install **PyTorch**
+
+  ```
+  pip3 install torch torchvision
+  ```
+
+2. Install **scikit-learn**
+
+  ```
+  pip3 install scikit-learn
+  ```
+
+3. Install **biopython**
+
+  ```
+  pip3 install biopython
+  ```
+
+4. Create `data/` folder inside the root directory of the repository and download the [necessary data](#data).
+
+5. Run the following command:
+
+  ```
+  python3 run.py
+  ```
+
 
 ## Repo organization
 The source code of this project is structured in the following manner: 
